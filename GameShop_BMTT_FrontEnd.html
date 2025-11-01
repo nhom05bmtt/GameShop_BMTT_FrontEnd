@@ -1863,7 +1863,7 @@
                 registerButton.disabled = true;
                 registerButton.textContent = 'Đang gửi OTP...';
 
-                const response = await fetch('http://localhost:3000/send-otp', {
+                const response = await fetch('https://gameshop-backend-zrrl.onrender.com/send-otp', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1919,7 +1919,7 @@
             }
 
             try {
-                const response = await fetch('http://localhost:3000/verify-otp', {
+                const response = await fetch('https://gameshop-backend-zrrl.onrender.com/verify-otp', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
