@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/GameShop_BMTT_FrontEnd.html"
+    }
+  ]
+}
