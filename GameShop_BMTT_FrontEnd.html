@@ -1030,11 +1030,11 @@
       </ul>
      </div>
      <div>
-      <h4 class="font-semibold text-white mb-4">Liên hệ</h4>
+      <h4 class="font-semibold text-white mb-4">Liên hệ NHOM05-BMTT</h4>
       <ul class="space-y-2 text-gray-300">
        <li>📧 support@gameshop.vn</li>
-       <li>📞 0123 456 789</li>
-       <li>📍 Hà Nội, Việt Nam</li>
+       <li>📞 0327499496</li>
+       <li>📍 TP HCM, Việt Nam</li>
       </ul>
      </div>
      <div>
@@ -1044,7 +1044,7 @@
      </div>
     </div>
     <div class="border-t border-white/10 mt-8 pt-8 text-center text-gray-300">
-     <p>© 2024 GameShop. Tất cả quyền được bảo lưu.</p>
+     <p>© 2025 GameShop. Tất cả quyền được bảo lưu.</p>
     </div>
    </div>
   </footer>
@@ -1891,22 +1891,31 @@
         }
 
         function showOTPSection() {
-            document.getElementById('otpSection').classList.remove('hidden');
-            document.getElementById('otpCode').textContent = otpCode;
-            
-            let timeLeft = 60;
-            document.getElementById('otpTimer').textContent = timeLeft;
-            
-            otpTimer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('otpTimer').textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(otpTimer);
-                    showToast('Mã OTP đã hết hạn', 'error');
-                    document.getElementById('otpSection').classList.add('hidden');
-                }
-            }, 1000);
+           document.getElementById('otpSection').classList.remove('hidden');
+           // document.getElementById('otpCode').textContent = otpCode; 
+            
+           let timeLeft = 300; // <--- SỬA THÀNH 300 (5 phút)
+           
+           // Cập nhật giao diện ngay lập tức
+           document.getElementById('otpTimer').textContent = '5:00'; 
+            
+           if (otpTimer) clearInterval(otpTimer); 
+
+           otpTimer = setInterval(() => {
+               timeLeft--;
+               
+               // Hiển thị phút và giây cho đẹp
+               const minutes = Math.floor(timeLeft / 60);
+               const seconds = timeLeft % 60;
+               document.getElementById('otpTimer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+               if (timeLeft <= 0) {
+                   clearInterval(otpTimer);
+                   showToast('Mã OTP đã hết hạn', 'error');
+                   document.getElementById('otpSection').classList.add('hidden');
+                   pendingUser = null; 
+               }
+           }, 1000);
         }
 
         // HÀM MỚI (SỬA LẠI TRONG FILE HTML CỦA BẠN)
@@ -1995,19 +2004,27 @@
         }
 
         function startForgotOtpTimer() {
-            let timeLeft = 60;
-            document.getElementById('forgotOtpTimer').textContent = timeLeft;
-            
-            forgotOtpTimer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('forgotOtpTimer').textContent = timeLeft;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(forgotOtpTimer);
-                    showToast('Mã OTP đã hết hạn. Vui lòng thử lại.', 'error');
-                    resetForgotPasswordForm();
-                }
-            }, 1000);
+           let timeLeft = 300; // <--- SỬA THÀNH 300 (5 phút)
+           
+           // Cập nhật giao diện ngay lập tức
+           document.getElementById('forgotOtpTimer').textContent = '5:00';
+            
+           if (forgotOtpTimer) clearInterval(forgotOtpTimer);
+
+           forgotOtpTimer = setInterval(() => {
+               timeLeft--;
+
+               // Hiển thị phút và giây cho đẹp
+               const minutes = Math.floor(timeLeft / 60);
+               const seconds = timeLeft % 60;
+               document.getElementById('forgotOtpTimer').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+               if (timeLeft <= 0) {
+                   clearInterval(forgotOtpTimer);
+                   showToast('Mã OTP đã hết hạn. Vui lòng thử lại.', 'error');
+                   resetForgotPasswordForm();
+               }
+           }, 1000);
         }
 
         function verifyForgotOTP(event) {
